@@ -28,7 +28,7 @@ def argsGreet(name,age):
 
 argsGreet("Liu","33")
 
-
+#带有自定义参数的装饰器
 def repeat(num): 
     def my_decorator(func): 
         def wrapper(*args, **kwargs): 
@@ -44,3 +44,21 @@ def greet(message):
 
 
 greet("hello")
+
+#类装饰器
+class Count:
+    def __init__(self, func):
+        self.func = func
+        self.num_calls = 0
+
+    def __call__(self, *args, **kwargs):
+        self.num_calls += 1
+        print('num of calls is: {}'.format(self.num_calls))
+        return self.func(*args, **kwargs)
+
+@Count
+def example():
+    print("hello world")
+
+example()
+example()
